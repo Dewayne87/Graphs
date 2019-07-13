@@ -12,31 +12,61 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
+        self.vertices[vertex] = set()
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
-        pass  # TODO
+        if v1 not in self.vertices:
+            self.add_vertex(v1)
+        if v2 not in self.vertices:
+            self.add_vertex(v2)
+        self.vertices[v1].add(v2)
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        q = Queue()
+        visited = set()
+        q.enqueue(starting_vertex)
+        while q.size() > 0:
+            node = q.dequeue()
+            if node not in visited:
+                visited.add(node)
+                print(node)
+                for edge in self.vertices[node]:
+                    q.enqueue(edge)
+                    
+
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
-    def dft_recursive(self, starting_vertex):
+        s = Stack()
+        visited = set()
+        s.push(starting_vertex)
+        while s.size() > 0:
+            node = s.pop()
+            if node not in visited:
+                visited.add(node)
+                print(node)
+                for edge in self.vertices[node]:
+                    s.push(edge)
+    def dft_recursive(self, node,visited = set()):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         This should be done using recursion.
         """
-        pass  # TODO
+        
+        if node not in visited:
+            visited.add(node)
+            print(node)
+            for edge in self.vertices[node]:
+                self.dft_recursive(edge,visited)
+
     def bfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing the shortest path from
@@ -118,15 +148,15 @@ if __name__ == '__main__':
     '''
     graph.dft_recursive(1)
 
-    '''
-    Valid BFS path:
-        [1, 2, 4, 6]
-    '''
-    print(graph.bfs(1, 6))
+    # '''
+    # Valid BFS path:
+    #     [1, 2, 4, 6]
+    # '''
+    # print(graph.bfs(1, 6))
 
-    '''
-    Valid DFS paths:
-        [1, 2, 4, 6]
-        [1, 2, 4, 7, 6]
-    '''
-    print(graph.dfs(1, 6))
+    # '''
+    # Valid DFS paths:
+    #     [1, 2, 4, 6]
+    #     [1, 2, 4, 7, 6]
+    # '''
+    # print(graph.dfs(1, 6))

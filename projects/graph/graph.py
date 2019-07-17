@@ -81,7 +81,7 @@ class Graph:
             if node == destination_vertex:
                 return path
             for edge in self.vertices[node]:
-                copy_path = path[:]
+                copy_path = path[:] ## necessary for correct path
                 copy_path.append(edge)
                 q.enqueue(copy_path)
     def dfs(self, starting_vertex, destination_vertex):
